@@ -1,0 +1,60 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% endblock %} - Choosy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="/static/style.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <a class="mdl-navigation__link" href="/"><span class="mdl-layout-title">Choosy</span></a>
+      <img src="/static/giphy.png" width="50px">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+        {% if g.user %}
+          <span class="mdl-navigation__text">{{ g.user["username"] }}</span>
+          <a class="mdl-navigation__link" href="{{ url_for("auth.logout") }}">Log out</a>
+        {% else %}
+          <a class="mdl-navigation__link" href="{{ url_for("auth.register") }}">Register</a>
+          <a class="mdl-navigation__link" href="{{ url_for("auth.login") }}">Log in</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Choosy</span>
+    <nav class="mdl-navigation">
+      {% if g.user %}
+        <a class="mdl-navigation__link" href={{ url_for("search.index") }}>Search</a>
+        <a class="mdl-navigation__link" href={{ url_for("star.index") }}>Favorites</a>
+        <a class="mdl-navigation__link" href="{{ url_for("auth.logout") }}">Log out</a>
+      {% else %}
+        <a class="mdl-navigation__link" href="{{ url_for("auth.register") }}">Register</a>
+        <a class="mdl-navigation__link" href="{{ url_for("auth.login") }}">Log in</a>
+      {% endif %}
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    {% block content %}{% endblock %}
+    <div class="mdl-js-snackbar mdl-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <div class="mdl-snackbar__action"></div>
+    </div>
+  </main>
+</div>
+<!-- Handle error popups -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+      var notification = document.querySelector('.mdl-js-snackbar');
+      {% for message in get_flashed_messages() %}
+      notification.MaterialSnackbar.showSnackbar({
+        message: '{{ message }}'
+      });
+      {% endfor %}
+    }, 0);
+  });
+</script>

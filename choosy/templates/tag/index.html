@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div><h3>{{ tag_name }}</h3></div>
+    <div class="mdl-layout-spacer"></div>
+  </div>
+  <div class="mdl-grid">
+  {% for gif in gifs %}
+    <div class="mdl-card mdl-cell mdl-cell mdl-shadow--4dp">
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-card__media">
+      <a href="/gif/{{ gif.id }}"><img src="{{ gif.images.fixed_width_still.url }}"></a>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  {% endfor %}
+  </div>
+  {% if gifs | length > 0 %}
+  <div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div>
+    {% if offset == 0 %}
+      <span class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" disabled>Previous</span>
+    {% else %}
+      <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" href="?search={{ search }}&offset={{offset - 6}} ">Previous</a>
+    {% endif %}
+    {% if more %}
+      <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" href="?search={{ search }}&offset={{ offset + 6 }}">
+        Next
+      </a>
+    {% else %}
+      <span class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" disabled>Next</span>
+    {% endif %}
+    </div>
+    <div class="mdl-layout-spacer"></div>
+  </div>
+{% endif %}
+{% endblock %}

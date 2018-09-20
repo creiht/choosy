@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="mdl-grid">
+    <div class="mdl-card mdl-cell mdl-cell mdl-shadow--4dp">
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-card__media">
+      <a href="{{ gif.url }}"><img src="{{ gif.images.fixed_width.url }}"></a>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+      <form method="POST">
+        <input type="submit" style="display: none" name="add_tag">
+        <div class="mdl-card__actions mdl-card--border">
+        {% if starred %}
+          <div class="mdl-typography--text-center">
+          <button class="mdl-button mdl-js-button" type="submit" name="unstar">
+            <i class="material-icons">star</i>
+          </button>
+          <div class="tag_input mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for "tag">Add tag</label>
+            <input class="mdl-textfield__input" name="tag" id="tag">
+          </div>
+          <button class="mdl-button mdl-js-button" type="submit" name="add_tag">
+            <i class="material-icons">add_box</i>
+          </button>
+          </div>
+        {% else %}
+          <button class="mdl-button mdl-js-button" type="submit" name="star">
+            <i class="material-icons">star_border</i>
+          </button>
+        {% endif %}
+          <br>
+        {% for tag in tags %}
+          <button type="button" class="mdl-chip">
+            <a href="/tag/{{ tag }}"><span class="mdl-chip__text">{{ tag }}</span></a>
+        {% endfor %}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

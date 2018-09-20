@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-card mdl-shadow--6dp login">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Register</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <form method="POST">
+          <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="username">Username</label>
+            <input class="mdl-textfield__input" name="username" id="username" required>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="password">Password</label>
+            <input class="mdl-textfield__input" type="password" name="password" id="password" required>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__label" for="password">Confirm Password</label>
+            <input class="mdl-textfield__input" type="password" name="password2" id="password2" required>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button-accent" type="submit" value="register">Register</button>
+        </form>
+      </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+  </div>
+{% endblock %}

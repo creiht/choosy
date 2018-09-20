@@ -1,0 +1,13 @@
+.mdl-card__title {
+  align-items: center;
+  justify-content: center;
+}
+
+.mdl-card__media {
+  background: #fff;
+  align-self: center;
+}
+
+.tag_input {
+  width: 200px;
+}
